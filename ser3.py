@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask_cors import CORS
 import RPi.GPIO as GPIO
@@ -12,6 +13,10 @@ p.start(2.5) # Initialization
 p.ChangeDutyCycle(5)
 time.sleep(0.5)
 p.stop()
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setup(14, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and set initial value to low (off)
+
+
 
 app=Flask(__name__)
 CORS(app)
@@ -32,10 +37,11 @@ def meow():
 
 @app.route('/led', methods=['POST'])
 def led():
-        GPIO.output(8, GPIO.HIGH) # Turn on
-        sleep(1) # Sleep for 1 second
-        GPIO.output(8, GPIO.LOW) # Turn off
-        sleep(1) # Sleep for 1 second
+	GPIO.output(14, GPIO.HIGH) # Turn on
+	time.sleep(1) # Sleep for 1 second
+	GPIO.output(14, GPIO.LOW) # Turn off
+	time.sleep(1) # Sleep for 1 second
+	return 'pressed'
 
 if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0')
