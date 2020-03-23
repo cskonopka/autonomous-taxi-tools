@@ -46,15 +46,15 @@ export default class Aptiv extends Component {
         <View style={styles.buttonContainerServo}>
           <Button
             title="Low"
-            onPress={() => this._onPressServo("Low")}
+            onPress={() => this._onPressServo('0')}
           />
           <Button
             title="Med"
-            onPress={() => this._onPressServo("Med")}
+            onPress={() => this._onPressServo('1')}
           />
           <Button
             title="High"
-            onPress={() => this._onPressServo("High")}
+            onPress={() => this._onPressServo('2')}
           />
         </View>
 
@@ -75,35 +75,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'column',
+        resizeMode: "center",
+  },
+  image: {
+    flexGrow: 1,
+    // margin: 74,
+    resizeMode: "center",
+    // borderTopWidth: 1,
+    // alignItems: 'center',
   },
   buttonContainerServo: {
+    flex: 0.9,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 75,
+    // paddingVertical: -10
+  },
+  buttonContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 13,
-    paddingBottom: 10
-  },
-  buttonContainer: {
-    flex: 3,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 13,
-    paddingBottom: 10
+
+    // width: "100%",
+    // margin: 13,
+    // paddingBottom: 10
   },
   alternativeLayoutButtonContainer: {
     margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  image: {
-    flexGrow: 1,
-    margin: 74,
-    resizeMode: "center",
-    borderTopWidth: 1,
-    height: null,
-    width: null,
-    alignItems: 'center',
   }
+
 });
