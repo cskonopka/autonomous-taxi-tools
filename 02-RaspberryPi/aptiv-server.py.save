@@ -15,7 +15,8 @@ GPIO.setup(14, GPIO.OUT, initial=GPIO.LOW)
 
 # GPIO extras
 GPIO.setwarnings(False) # Ignore warning for now
-#p.start(2.5)
+
+# p.start(2.5)
 # p.ChangeDutyCycle(5)
 # time.sleep(0.5)
 # p.stop()
@@ -24,7 +25,6 @@ GPIO.setwarnings(False) # Ignore warning for now
 app=Flask(__name__)
 CORS(app)
 
-
 def servo_routine():
 	data = request.get_json()
 	print(data['language'])
@@ -32,21 +32,21 @@ def servo_routine():
 	data = request.get_json()
 	if data['language'] == '0':
 		print('low')
-		p.start(2.5)
-		p.ChangeDutyCycle(2.5)
+		p.start(0)
+		p.ChangeDutyCycle(45/18+3)
 		time.sleep(1)
 		p.stop()
 	elif data['language'] == '1':
 		print('med')
-		p.start(5)
-		p.ChangeDutyCycle(7.5)
-		time.sleep(0.5)
+		p.start(0)
+		p.ChangeDutyCycle(90/18+3)
+		time.sleep(1)
 		p.stop()
 	elif data['language'] == '2':
 		print('high')
-		p.start(7)
-		p.ChangeDutyCycle(12.5)
-		time.sleep(0.5)
+		p.start(0)
+		p.ChangeDutyCycle(180/18+3)
+		time.sleep(1)
 		p.stop()
 
 	#p.start(2.5)
@@ -68,14 +68,9 @@ def index():
         return 'this is a beginning'
 
 @app.route('/servo', methods=['GET', 'POST'])
-<<<<<<< HEAD
-def meow():
-        servo_routine()
-=======
 def servo():
 	servo_routine()
 	return 'the head is up!'
->>>>>>> b751b855570f499b9c7a265b2a47b41b905c1c83
 
 @app.route('/led', methods=['POST'])
 def led():

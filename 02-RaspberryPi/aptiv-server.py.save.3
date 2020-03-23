@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask_cors import CORS
 from flask import request
@@ -34,8 +35,27 @@ def servo_routine():
 		print('low')
 		p.start(2.5)
 		p.ChangeDutyCycle(2.5)
-		time.sleep(1)
+		time.sleep(2.5)
 		p.stop()
+		i = 0
+		while i == 0:
+  	  p.ChangeDutyCycle(5)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(7.5)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(10)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(12.5)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(10)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(7.5)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(5)
+  	  time.sleep(0.5)
+  	  p.ChangeDutyCycle(2.5)
+  	  time.sleep(0.5)
+
 	elif data['language'] == '1':
 		print('med')
 		p.start(5)
@@ -68,14 +88,9 @@ def index():
         return 'this is a beginning'
 
 @app.route('/servo', methods=['GET', 'POST'])
-<<<<<<< HEAD
-def meow():
-        servo_routine()
-=======
 def servo():
 	servo_routine()
 	return 'the head is up!'
->>>>>>> b751b855570f499b9c7a265b2a47b41b905c1c83
 
 @app.route('/led', methods=['POST'])
 def led():
