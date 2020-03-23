@@ -3,17 +3,18 @@ import { Button, Switch, StyleSheet, View, Image } from 'react-native';
 
 export default class Aptiv extends Component {
   // HTTP POST to Raspberry Pi --> Servo
-  _onPressServo() {
-    // fetch('http://10.0.0.197:5000/meow', {
-    fetch('http://6250efad.ngrok.io/meow', {
+  _onPressServo(key) {
+    console.log(key)
+    fetch('http://10.0.0.197:5000/servo', {
+      // fetch('http://6250efad.ngrok.io/meow', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstParam: 'yourValue',
-        secondParam: 'yourOtherValue',
+        language: key,
+        framework: 'yourOtherValue',
       }),
     });
     alert('servo')
@@ -21,8 +22,8 @@ export default class Aptiv extends Component {
 
   // HTTP POST to Raspberry Pi --> LED
   _onPressLED() {
-    // fetch('http://10.0.0.197:5000/led', {
-    fetch('http://6250efad.ngrok.io/led', {
+    fetch('http://10.0.0.197:5000/led', {
+      // fetch('http://6250efad.ngrok.io/led', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -42,12 +43,21 @@ export default class Aptiv extends Component {
         <Image style={styles.image}
           source={{ uri: 'https://i.ibb.co/7twxPvD/aptiv.png' }}>
         </Image>
-        <View style={styles.buttonContainer}>
+        <View style={styles.buttonContainerServo}>
           <Button
-            onPress={this._onPressServo}
-            title="Servo"
+            title="Low"
+            onPress={() => this._onPressServo("Low")}
+          />
+          <Button
+            title="Med"
+            onPress={() => this._onPressServo("Med")}
+          />
+          <Button
+            title="High"
+            onPress={() => this._onPressServo("High")}
           />
         </View>
+
         <View style={styles.buttonContainer}>
           <Button
             onPress={this._onPressLED}
@@ -66,11 +76,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
   },
-  buttonContainer: {
+  buttonContainerServo: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     margin: 13,
-    paddingBottom: 1
+    paddingBottom: 10
+  },
+  buttonContainer: {
+    flex: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 13,
+    paddingBottom: 10
   },
   alternativeLayoutButtonContainer: {
     margin: 20,

@@ -29,7 +29,7 @@ CORS(app)
 def index():
         return 'this is a beginning'
 
-@app.route('/meow', methods=['GET', 'POST'])
+@app.route('/servo', methods=['GET', 'POST'])
 def meow():
         servo_routine()
 
