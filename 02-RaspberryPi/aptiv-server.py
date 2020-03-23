@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from flask import request
 import RPi.GPIO as GPIO
 import time
 
@@ -22,37 +23,42 @@ GPIO.setwarnings(False) # Ignore warning for now
 
 # Flask app
 app=Flask(__name__)
+
 CORS(app)
 
-# API routes
-@app.route('/')
-def index():
-        return 'this is a beginning'
-
-@app.route('/meow', methods=['GET', 'POST'])
-def meow():
-        servo_routine()
-
-@app.route('/led', methods=['POST'])
-def led():
-	led_routine()
-
-if __name__ == '__main__':
-        app.run(debug=True, host='0.0.0.0')
-
 def servo_routine():
-        print ("servo")
-        p.start(2.5)
-        p.ChangeDutyCycle(10)
-        time.sleep(0.5)
-        p.ChangeDutyCycle(2.5)
-        time.sleep(0.5)
-        p.stop()
-        return 'The heat is up.'
+	data = request.get_json()
+	print(data['language'])
+	print(data['framework'])
+	print ("servo")
+	p.start(2.5)
+	p.ChangeDutyCycle(10)
+	time.sleep(0.5)
+	p.ChangeDutyCycle(2.5)
+	time.sleep(0.5)
+	p.stop()
 
 def led_routine():
         GPIO.output(14, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(14, GPIO.LOW)
         time.sleep(1)
-        return 'LED triggered'
+
+# API routes
+@app.route('/')
+def index():
+        return 'this is a beginning'
+
+@app.route('/servo', methods=['GET', 'POST'])
+def servo():
+	servo_routine()
+	return 'the head is up!'
+
+@app.route('/led', methods=['POST'])
+def led():
+	led_routine()
+	return 'it is up'
+
+if __name__ == '__main__':
+        app.run(debug=True, host='0.0.0.0')
+
