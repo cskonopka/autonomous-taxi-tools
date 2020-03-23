@@ -15,7 +15,8 @@ GPIO.setup(14, GPIO.OUT, initial=GPIO.LOW)
 
 # GPIO extras
 GPIO.setwarnings(False) # Ignore warning for now
-#p.start(2.5)
+
+# p.start(2.5)
 # p.ChangeDutyCycle(5)
 # time.sleep(0.5)
 # p.stop()
@@ -32,21 +33,21 @@ def servo_routine():
 	data = request.get_json()
 	if data['language'] == '0':
 		print('low')
-		p.start(2.5)
-		p.ChangeDutyCycle(2.5)
+		p.start(2)
+		p.ChangeDutyCycle(2)
 		time.sleep(1)
 		p.stop()
 	elif data['language'] == '1':
 		print('med')
-		p.start(5)
+		p.start(0)
 		p.ChangeDutyCycle(7.5)
-		time.sleep(0.5)
+		time.sleep(1)
 		p.stop()
 	elif data['language'] == '2':
 		print('high')
-		p.start(7)
-		p.ChangeDutyCycle(12.5)
-		time.sleep(0.5)
+		p.start(0)
+		p.ChangeDutyCycle(10)
+		time.sleep(1)
 		p.stop()
 
 	#p.start(2.5)
