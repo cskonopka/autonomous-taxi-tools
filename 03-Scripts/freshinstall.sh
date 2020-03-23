@@ -1,8 +1,12 @@
 #!/bin/bash
 
-
+# Update
+sudo apt-get update
+# Install GPIO lib
+sudo pip3 install --upgrade RPi.GPIO
+# Install Git
 sudo apt install git
-
+# Install Python3 from source
 sudo su
 cd /usr/src
 wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
@@ -17,8 +21,7 @@ python3 --version
 rm -Rf Python-3.7.0
 rm Python-3.7.0.tgz
 exit
-
+# Install Flask
 sudo apt-get install python3-flask
+# Install Flask CORS
 pip install -U flask-cors
-sudo pip3 install --upgrade RPi.GPIO
-

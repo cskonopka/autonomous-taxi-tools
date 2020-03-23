@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, View, Image } from 'react-native';
-import { paddedString } from 'uuid-js';
+import { Button, Switch, StyleSheet, View, Image } from 'react-native';
 
 export default class Aptiv extends Component {
+  // HTTP POST to Raspberry Pi --> Servo
   _onPressServo() {
     // fetch('http://10.0.0.197:5000/meow', {
     fetch('http://6250efad.ngrok.io/meow', {
@@ -18,6 +18,8 @@ export default class Aptiv extends Component {
     });
     alert('servo')
   }
+
+  // HTTP POST to Raspberry Pi --> LED
   _onPressLED() {
     // fetch('http://10.0.0.197:5000/led', {
     fetch('http://6250efad.ngrok.io/led', {
@@ -33,7 +35,6 @@ export default class Aptiv extends Component {
     });
     alert('led')
   }
-
 
   render() {
     return (
@@ -53,7 +54,7 @@ export default class Aptiv extends Component {
             title="LED"
           />
         </View>
-
+        <Switch></Switch>
       </View >
     );
   }
@@ -69,8 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     margin: 13,
-    // marginBottom: 10,
-
     paddingBottom: 1
   },
   alternativeLayoutButtonContainer: {
@@ -86,6 +85,5 @@ const styles = StyleSheet.create({
     height: null,
     width: null,
     alignItems: 'center',
-    // justifyContent:'center',
   }
 });
