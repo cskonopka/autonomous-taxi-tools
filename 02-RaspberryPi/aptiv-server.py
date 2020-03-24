@@ -20,9 +20,14 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 # Servo setup
-servoPIN = 17
+servoPIN=17
 GPIO.setup(servoPIN, GPIO.OUT)
 p = GPIO.PWM(servoPIN, 50)
+
+# Buzzer setup
+buzzPin=11
+GPIO.setup(buzzPin, GPIO.OUT)   # Set BeepPin's mode is output
+GPIO.output(buzzPin, GPIO.HIGH) # Set BeepPin high(+3.3V) to off beep
 
 # LED setup
 GPIO.setup(14, GPIO.OUT, initial=GPIO.LOW)
@@ -60,6 +65,25 @@ def led_routine():
         GPIO.output(14, GPIO.LOW)
         time.sleep(1)
 
+# buzzer_routine --> Control LEDs via GPIO
+def buzzer_routine():
+	data = request.get_json()
+	print(data['language'])
+	print(data['framework'])
+	data = request.get_json()
+	if data['language'] == '0':
+		print('low')
+		GPIO.output(11, GPIO.LOW)
+		time.sleep(0.1)
+		GPIO.output(11, GPIO.HIGH)
+		time.sleep(0.1)
+	elif data['language'] == '1':
+		for x in range(0, 3):
+			GPIO.output(11, GPIO.LOW)
+			time.sleep(0.1)
+			GPIO.output(11, GPIO.HIGH)
+			time.sleep(3)
+
 # ~~~~~~~~~~~~~~~ API ~~~~~~~~~~~~~~~
 # ENDPOINT --> Index test
 @app.route('/')
@@ -82,6 +106,13 @@ def led():
 	led_routine()
 	# Return prompt
 	return 'Thank you for riding with us!'
+
+@app.route('/buzzer', methods=['POST'])
+def buzzer():
+	# Start LED operation
+	buzzer_routine()
+	# Return prompt
+	return 'buzzed!'
 
 # ~~~~~~~~~~~~~~~ Flask ~~~~~~~~~~~~~~~
 if __name__ == '__main__':
