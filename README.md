@@ -33,6 +33,7 @@ A suite of wireless HCI examples.
   <img width="30%" height="30%" src="https://i.ibb.co/NxhPBXZ/aptiv-taxitools-reactnative.png"/>  
 </p>
 
+<<<<<<< HEAD
 
 - Change the heat in the backseat
   - 
@@ -40,6 +41,8 @@ A suite of wireless HCI examples.
 - Rider verification passcode
 
 
+=======
+>>>>>>> 3829979d5c256293ff5f18fc0c391a5eefd16bc5
 # Raspberry Pi + Python3 + Flask
 <p align="center">
   <img width="85%" height="85%" src="https://i.ibb.co/qCFzDNx/aptiv-taxitools-rpi.png"/>  
