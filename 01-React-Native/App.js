@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, View, Image } from 'react-native';
 
 export default class Aptiv extends Component {
-  // HTTP POST to Raspberry Pi --> Servo
+  // HTTP POST to Raspberry Pi --> Determine servo position: 'Low', 'Med', 'High'
   _onPressServo(key) {
     console.log(key)
     fetch('http://10.0.0.197:5000/servo', {
@@ -20,7 +20,7 @@ export default class Aptiv extends Component {
     alert('servo')
   }
 
-  // HTTP POST to Raspberry Pi --> LED
+  // HTTP POST to Raspberry Pi --> Control LED
   _onPressLED() {
     fetch('http://10.0.0.197:5000/led', {
       // fetch('http://6250efad.ngrok.io/led', {
