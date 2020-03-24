@@ -4,13 +4,22 @@
 
 A suite of wireless HCI examples.
 
+- pi + react + aptiv logo together
+
+
+
+
+
+
 # Requirements
-- Mobile
+
+## Mobile
   - Android phone
   - USB-C cable
   - [React-Native](https://reactnative.dev/)
   - [Expo](https://expo.io/)
-- Hardware
+  
+## Hardware
   - Raspberry Pi (in my case: 3B+)
   - LEDs (+ resistors)
   - Buzzer
@@ -18,6 +27,22 @@ A suite of wireless HCI examples.
   - Hookup wire
   - Breadboard
   - USB-C power supply
+
+# React-Native
+<p align="center">
+  <img width="30%" height="30%" src="https://i.ibb.co/NxhPBXZ/aptiv-taxitools-reactnative.png"/>  
+</p>
+
+# Raspberry Pi + Python3 + Flask
+<p align="center">
+  <img width="85%" height="85%" src="https://i.ibb.co/qCFzDNx/aptiv-taxitools-rpi.png"/>  
+</p>
+
+# Workflow
+<p align="center">
+  <img width="85%" height="85%" src="https://i.ibb.co/ByWBZq5/Aptiv-taxitools-Workflow.png"/>  
+</p>
+
 
 # Task
 Your task is to create an interaction that allows the user to provide an input (e.g.
