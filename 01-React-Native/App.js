@@ -1,5 +1,6 @@
+// Stock React-Native libraries
 import React, { Component } from 'react';
-import { Button, View, Image, TextInput } from 'react-native';
+import { Button, View, Image, TextInput, Text } from 'react-native';
 
 export default class Aptiv extends Component {
   // Defining state for TextInput
@@ -9,8 +10,7 @@ export default class Aptiv extends Component {
       TextInputValue: ''
     }
   }
-
-  // HTTP POST to Raspberry Pi --> Determine servo position: 'Low', 'Med', 'High'
+  // Ambient Cooling selection --> HTTP POST to Rpi (servo) 
   _onPressServo(key) {
     console.log(key)
     fetch('http://10.0.0.197:5000/servo', {
@@ -32,7 +32,7 @@ export default class Aptiv extends Component {
       });
   }
 
-  // HTTP POST to Raspberry Pi --> Control LED
+  // ?? --> HTTP POST to Rpi (led)
   _onPressLED() {
     fetch('http://10.0.0.197:5000/led', {
       method: 'POST',
@@ -50,7 +50,7 @@ export default class Aptiv extends Component {
       });
   }
 
-  // HTTP POST to Raspberry Pi --> Passcode submission
+  // Rider Passcode Verification --> HTTP POST to Rpi (buzzer/led)
   _onPressPasscode = () => {
     const { TextInputValue } = this.state;
     fetch('http://10.0.0.197:5000/passcode', {
@@ -63,23 +63,29 @@ export default class Aptiv extends Component {
         answer: TextInputValue
       })
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      alert(responseJson.msg);
-    })
-    .catch((error) => {
-      alert("something went wrong :/");
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        alert(responseJson.msg);
+      })
+      .catch((error) => {
+        alert("something went wrong :/");
+      });
   }
 
   render() {
     return (
+      // App container 
       <View style={styles.container}>
+        {/* BLOCK --> Aptiv logo */}
         <Image style={styles.image}
           resizeMode="contain"
           resizeMethod="resize"
           source={{ uri: 'https://i.ibb.co/nsqfBcb/aptiv.png' }}>
         </Image>
+        {/* BLOCK --> Ambient Cooling (servo) */}
+        <View style={styles.textContainer} >
+          <Text style={{ fontSize: 24 }}>Ambient Cooling</Text>
+        </View>
         <View style={styles.servoContainer} >
           <Button
             title="Low"
@@ -94,11 +100,19 @@ export default class Aptiv extends Component {
             onPress={() => this._onPressServo('High')}
           />
         </View>
+        {/* BLOCK -->  (LED) */}
+        <View style={styles.textContainer} >
+          <Text style={{ fontSize: 24 }}>Rider Verification</Text>
+        </View>
         <View style={styles.ledContainer} >
           <Button
             onPress={this._onPressLED}
-            title="LED"
+            title="Exit"
           />
+        </View>
+        {/* BLOCK -->  Rider Passcode Verification */}
+        <View style={styles.textContainer} >
+          <Text style={{ fontSize: 24 }}>Rider Passcode Verification</Text>
         </View>
         <View style={styles.passcodeContainer} >
           <TextInput
@@ -112,13 +126,12 @@ export default class Aptiv extends Component {
             title="Submit"
           />
         </View>
-        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }} />
-        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }} />
       </View>
     );
   }
 }
 
+// App styles
 const styles = {
   container: {
     marginTop: 48,
@@ -128,15 +141,23 @@ const styles = {
     backgroundColor: '#FFFFFF',
     marginLeft: 24,
     marginRight: 24,
-    marginBottom: 24
+    marginBottom: 0
   },
   image: {
     height: 100,
     width: 300,
+    marginLeft: 3,
     backgroundColor: '#FFFFFF',
     resizeMode: 'contain',
     alignContent: 'center',
     justifyContent: 'center'
+  },
+  textContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   servoContainer: {
     flex: 1,
@@ -144,13 +165,18 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 0,
+    marginBottom: 10,
   },
   ledContainer: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    marginBottom: 10,
+    backgroundColor: '#FFFFFF',
+    marginBottom: 10
   },
   passcodeContainer: {
-    flex: 5,
-    backgroundColor: '#FFFFFF'
+    marginBottom: 10,
+    flex: 3,
+    backgroundColor: '#FFFFFF',
   }
 }

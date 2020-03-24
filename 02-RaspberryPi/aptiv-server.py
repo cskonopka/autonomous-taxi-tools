@@ -37,7 +37,6 @@ GPIO.setup(3, GPIO.OUT, initial=GPIO.LOW)  # passcode no
 def servo_routine():
     data = request.get_json()
     print(data['choice'])
-    data = request.get_json()
     if data['choice'] == 'Low':
         print('low')
         p.start(2.5)
@@ -90,6 +89,8 @@ def led():
     return jsonify(
         msg='Thank you for riding with us!'
     )
+# environment variables
+# os.environ['passcode']
 
 # ENDPOINT --> Passcode
 @app.route('/passcode', methods=['POST'])
@@ -103,7 +104,7 @@ def passcode():
 		GPIO.output(2, GPIO.LOW)
 		time.sleep(0.1)
 		return jsonify(msg='Success!')
-	elif data['answer'] == 'aptiv':
+	elif data['answer'] == 'Aptiv':
 		for x in range(0, 10):
 			GPIO.output(2, GPIO.HIGH)
 			GPIO.output(3, GPIO.LOW)
@@ -127,4 +128,4 @@ def passcode():
 
 # ~~~~~~~~~~~~~~~ Flask ~~~~~~~~~~~~~~~
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False	, host='0.0.0.0')
