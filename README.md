@@ -407,7 +407,11 @@ def passcode():
 
 - When prompted, supply the password for the operating system. If it is a fresh install, the password will be *raspberry*. 
 
-- Install the *[aptiv-install.sh](https://gist.github.com/cskonopka/89bd1a6c414429852057e783e8bf46ae)* script. It is a bash script for installing updating the pi and installing git, python3 and flask. The process may take a while. This is the perfect time to grab a coffee and read an article.
+- Install the *[aptiv-install.sh](https://gist.github.com/cskonopka/89bd1a6c414429852057e783e8bf46ae)* script. It is a bash script for installing updating the pi and installing git, python3 and flask. The process may take a while. This is the perfect time to grab a coffee and read a wiki article.
+
+  ```bash
+  sh aptiv-install.sh
+  ```
 
 - Clone the repository.
 
@@ -422,5 +426,3 @@ def passcode():
   ```bash
   python3 aptiv-server.py
   ```
-
-# Video Demo
