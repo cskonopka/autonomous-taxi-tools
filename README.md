@@ -7,16 +7,19 @@
 
 # Requirements
 
-### Mobile
+### React Native
 
   - Android phone
   - USB-C cable
   - [React-Native](https://reactnative.dev/)
   - [Expo](https://expo.io/)
 
-### Hardware
+### Raspberry Pi
 
   - Raspberry Pi (in my case: 3B+)
+  - Raspbian OS
+  - Python3
+  - Flask
   - USB-C power supply
   - Hookup wire
   - Breadboard
@@ -380,10 +383,44 @@ def passcode():
 
 - Follow the workflow diagram in the previous section when connecting peripherals.
 - Plug in the USB-C 5v power supply and wait for the device to boot up.
+
+### Current Prototype
+
 - The Raspberry Pi automatically starts the file *aptiv-server.py* in the *02-RaspberryPi* folder. The current prototype uses a static to make it easier to test in various locations.
-- After waiting about a minute, go to the React-Native application and select a process to test.  
+- After waiting about a minute, go to the React-Native application and select a process to test. 
 
+### Starting from scratch
 
+- Open a new terminal window.
+
+- Ping for the Raspberry Pi using *ping* to find the IP address of the board.
+
+  ```bash
+  ping raspberrypi.local
+  ```
+
+- SSH into the operating system using the IP address.
+
+  ```bash
+  ssh pi@x.x.x.x
+  ```
+
+- When prompted, supply the password for the operating system. If it is a fresh install, the password will be *raspberry*. 
+
+- Install the *[aptiv-install.sh](https://gist.github.com/cskonopka/89bd1a6c414429852057e783e8bf46ae)* script. It is a bash script for installing updating the pi and installing git, python3 and flask. The process may take a while. This is the perfect time to grab a coffee and read an article.
+
+- Clone the repository.
+
+  ```bash
+  git clone https://github.com/cskonopka/aptiv-taxi-tools.git
+  ```
+
+- Change the directory to *02-RaspberryPi*.
+
+- Start the server. The Raspberry Pi can now receive HTTP POST requests from the React Native application.
+
+  ```bash
+  python3 aptiv-server.py
+  ```
 
 # Video Demo
-
