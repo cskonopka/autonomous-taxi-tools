@@ -1,8 +1,10 @@
 // Stock React-Native libraries
 import React, { Component } from 'react';
 import { Button, View, Image, TextInput, Text } from 'react-native';
+const url = 'http://10.0.0.197:5000';
 
 export default class Aptiv extends Component {
+  
   // Defining state for TextInput
   constructor(props) {
     super(props)
@@ -10,10 +12,11 @@ export default class Aptiv extends Component {
       TextInputValue: ''
     }
   }
+
   // Ambient Cooling selection --> HTTP POST to Rpi (ac) 
   _onPressAC(key) {
     console.log(key)
-    fetch('http://10.0.0.197:5000/ac', {
+    fetch(url+'/ac', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -35,7 +38,7 @@ export default class Aptiv extends Component {
 
   // Dropoff --> HTTP POST to Rpi (dropoff)
   _onPressDropoff() {
-    fetch('http://10.0.0.197:5000/dropoff', {
+    fetch(url+'/dropoff', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -55,7 +58,7 @@ export default class Aptiv extends Component {
   // Rider Passcode Verification --> HTTP POST to Rpi (/passcode)
   _onPressPasscode = () => {
     const { TextInputValue } = this.state;
-    fetch('http://10.0.0.197:5000/passcode', {
+    fetch(url+'/passcode', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
