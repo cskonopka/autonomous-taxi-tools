@@ -96,7 +96,7 @@ A rider can select from three settings of "Ambient Cooling"; Low, Medium and Hig
   ``` javascript
   _onPressAC(key) {
     console.log(key)
-    fetch('http://10.0.0.197:5000/ac', {
+    fetch(url+'/ac', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -159,7 +159,7 @@ A rider decides they would like to end the ride before arriving at the destinati
 
   ```javascript
   _onPressDropoff() {
-    fetch('http://10.0.0.197:5000/dropoff', {
+    fetch(url+'/dropoff', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -214,7 +214,7 @@ When a vehicle arrives, it will prompt the rider to enter a passcode received pr
   ```javascript 
   _onPressPasscode = () => {
     const { TextInputValue } = this.state;
-    fetch('http://10.0.0.197:5000/passcode', {
+    fetch(url+'/passcode', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
