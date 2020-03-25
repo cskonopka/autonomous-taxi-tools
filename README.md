@@ -68,7 +68,7 @@ The primary file for the React-Native application is *App.js*. Find all interact
 
 A rider can select from three settings of "Ambient Cooling"; Low, Medium and High.
 
-```react
+```javascript
 <View style={styles.textContainer} >
   <Text style={{ fontSize: 24 }}>Ambient Cooling</Text>
 </View>
@@ -90,7 +90,7 @@ A rider can select from three settings of "Ambient Cooling"; Low, Medium and Hig
 
 - Each choice (*Low*, *Medium*, *High*) creates an HTTP POST request and passes the choice to the server. When complete, it sends a JSON response to the mobile application and creates an alert.
 
-  ``` react
+  ``` javascript
   _onPressAC(key) {
     console.log(key)
     fetch('http://10.0.0.197:5000/ac', {
@@ -140,7 +140,7 @@ A rider can select from three settings of "Ambient Cooling"; Low, Medium and Hig
 
 A rider decides they would like to end the ride before arriving at the destination. The rider selects the *Dropoff* button, triggering an HTTP request.
 
-```react
+```javascript
 <View style={styles.textContainer} >
   <Text style={{ fontSize: 24 }}>Arrived?</Text>
 </View>
@@ -154,7 +154,7 @@ A rider decides they would like to end the ride before arriving at the destinati
 
 - On press the function creates an HTTP POST request and illuminates an LED. When complete, it sends a JSON response to the mobile application and creates an alert.
 
-  ```react
+  ```javascript
   _onPressDropoff() {
     fetch('http://10.0.0.197:5000/dropoff', {
       method: 'POST',
@@ -188,7 +188,7 @@ When a vehicle arrives, it will prompt the rider to enter a passcode received pr
 
 - *Enter a passcode*: Enter a valid passcode and set the state of the associated variable.
 
-  ```react
+  ```javascript
   <View style={styles.textContainer} >
     <Text style={{ fontSize: 24 }}>Rider Passcode Verification</Text>
   </View>
@@ -208,7 +208,7 @@ When a vehicle arrives, it will prompt the rider to enter a passcode received pr
 
 - *Submit*: HTTP POST request to */passcode* on press to validate the passcode. When complete, it sends a JSON response to the mobile application and creates an alert.
 
-  ```react 
+  ```javascript 
   _onPressPasscode = () => {
     const { TextInputValue } = this.state;
     fetch('http://10.0.0.197:5000/passcode', {
