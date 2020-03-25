@@ -10,10 +10,10 @@ export default class Aptiv extends Component {
       TextInputValue: ''
     }
   }
-  // Ambient Cooling selection --> HTTP POST to Rpi (servo) 
-  _onPressServo(key) {
+  // Ambient Cooling selection --> HTTP POST to Rpi (ac) 
+  _onPressAC(key) {
     console.log(key)
-    fetch('http://10.0.0.197:5000/servo', {
+    fetch('http://10.0.0.197:5000/ac', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -23,6 +23,7 @@ export default class Aptiv extends Component {
         choice: key,
       }),
     })
+      // Server response
       .then((response) => response.json())
       .then((responseJson) => {
         alert(responseJson.msg);
@@ -32,15 +33,16 @@ export default class Aptiv extends Component {
       });
   }
 
-  // ?? --> HTTP POST to Rpi (led)
-  _onPressLED() {
-    fetch('http://10.0.0.197:5000/led', {
+  // Dropoff --> HTTP POST to Rpi (dropoff)
+  _onPressDropoff() {
+    fetch('http://10.0.0.197:5000/dropoff', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
     })
+      // Server response
       .then((response) => response.json())
       .then((responseJson) => {
         alert(responseJson.msg);
@@ -50,7 +52,7 @@ export default class Aptiv extends Component {
       });
   }
 
-  // Rider Passcode Verification --> HTTP POST to Rpi (buzzer/led)
+  // Rider Passcode Verification --> HTTP POST to Rpi (/passcode)
   _onPressPasscode = () => {
     const { TextInputValue } = this.state;
     fetch('http://10.0.0.197:5000/passcode', {
@@ -63,6 +65,7 @@ export default class Aptiv extends Component {
         answer: TextInputValue
       })
     })
+      // Server response
       .then((response) => response.json())
       .then((responseJson) => {
         alert(responseJson.msg);
@@ -82,35 +85,35 @@ export default class Aptiv extends Component {
           resizeMethod="resize"
           source={{ uri: 'https://i.ibb.co/nsqfBcb/aptiv.png' }}>
         </Image>
-        {/* BLOCK --> Ambient Cooling (servo) */}
+        {/* BLOCK --> Ambient Cooling (ac) */}
         <View style={styles.textContainer} >
           <Text style={{ fontSize: 24 }}>Ambient Cooling</Text>
         </View>
-        <View style={styles.servoContainer} >
+        <View style={styles.acContainer} >
           <Button
             title="Low"
-            onPress={() => this._onPressServo('Low')}
+            onPress={() => this._onPressAC('Low')}
           />
           <Button
             title="Medium"
-            onPress={() => this._onPressServo('Medium')}
+            onPress={() => this._onPressAC('Medium')}
           />
           <Button
             title="High"
-            onPress={() => this._onPressServo('High')}
+            onPress={() => this._onPressAC('High')}
           />
         </View>
-        {/* BLOCK -->  (LED) */}
+        {/* BLOCK -->  Dropoff (dropoff)*/}
         <View style={styles.textContainer} >
-          <Text style={{ fontSize: 24 }}>Rider Verification</Text>
+          <Text style={{ fontSize: 24 }}>Arrived?</Text>
         </View>
-        <View style={styles.ledContainer} >
+        <View style={styles.dropoffContainer} >
           <Button
-            onPress={this._onPressLED}
-            title="Exit"
+            onPress={this._onPressDropoff}
+            title="Dropoff"
           />
         </View>
-        {/* BLOCK -->  Rider Passcode Verification */}
+        {/* BLOCK -->  Rider Passcode Verification (passcode) */}
         <View style={styles.textContainer} >
           <Text style={{ fontSize: 24 }}>Rider Passcode Verification</Text>
         </View>
@@ -159,7 +162,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  servoContainer: {
+  acContainer: {
     flex: 1,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
@@ -168,7 +171,7 @@ const styles = {
     marginBottom: 0,
     marginBottom: 10,
   },
-  ledContainer: {
+  dropoffContainer: {
     flex: 1,
     marginBottom: 10,
     backgroundColor: '#FFFFFF',

@@ -33,8 +33,8 @@ GPIO.setup(2, GPIO.OUT, initial=GPIO.LOW)  # passcode yes
 GPIO.setup(3, GPIO.OUT, initial=GPIO.LOW)  # passcode no
 
 # ~~~~~~~~~~~~~~~ RPi GPIO Functions ~~~~~~~~~~~~~~~
-# servo_routine --> Control servo via GPIO
-def servo_routine():
+# ac_routine --> Control servo via GPIO
+def ac_routine():
     data = request.get_json()
     print(data['choice'])
     if data['choice'] == 'Low':
@@ -56,41 +56,34 @@ def servo_routine():
         time.sleep(0.5)
         p.stop()
 
-# led_routine --> Control LEDs via GPIO
-def led_routine():
+# dropoff_routine --> Control LEDs via GPIO
+def dropoff_routine():
     GPIO.output(14, GPIO.HIGH)
     time.sleep(1)
     GPIO.output(14, GPIO.LOW)
     time.sleep(1)
 
 # ~~~~~~~~~~~~~~~ API ~~~~~~~~~~~~~~~
-# ENDPOINT --> Index test
-@app.route('/')
-def index():
-    return 'this is a beginning'
-
-# ENDPOINT --> Servo
-@app.route('/servo', methods=['GET', 'POST'])
-def servo():
+# ENDPOINT --> Ambient Cooling
+@app.route('/ac', methods=['POST'])
+def ac():
     data = request.get_json()
     # Start servo operation
-    servo_routine()
-    # Return prompt
+    ac_routine()
+    # Return alert
     return jsonify(
-        msg='The heat is set to ' + data['choice']
+        msg='Ambient Cooling set to ' + data['choice']
     )
 
-# ENDPOINT --> LED
-@app.route('/led', methods=['POST'])
-def led():
+# ENDPOINT --> Dropoff
+@app.route('/dropoff', methods=['POST'])
+def dropoff():
     # Start LED operation
-    led_routine()
-    # Return prompt
+    dropoff_routine()
+    # Return alert
     return jsonify(
-        msg='Thank you for riding with us!'
+        msg='Thank you for riding with Aptiv!'
     )
-# environment variables
-# os.environ['passcode']
 
 # ENDPOINT --> Passcode
 @app.route('/passcode', methods=['POST'])
@@ -103,7 +96,7 @@ def passcode():
 		GPIO.output(27, GPIO.LOW)
 		GPIO.output(2, GPIO.LOW)
 		time.sleep(0.1)
-		return jsonify(msg='Success!')
+		return jsonify(msg='Enjoy the ride!')
 	elif data['answer'] == 'Aptiv':
 		for x in range(0, 10):
 			GPIO.output(2, GPIO.HIGH)
@@ -115,7 +108,7 @@ def passcode():
 			GPIO.output(2, GPIO.LOW)
 			GPIO.output(3, GPIO.LOW)
 			time.sleep(0.1)
-		return jsonify(msg='EASTER EGG')
+		return jsonify(msg='Did you miss the light show?')
 	else:
 		for x in range(0, 3):
 			GPIO.output(27, GPIO.HIGH)
@@ -124,7 +117,7 @@ def passcode():
 			GPIO.output(27, GPIO.LOW)
 			GPIO.output(3, GPIO.LOW)
 			time.sleep(0.1)
-		return jsonify(msg='INCORRECT')
+		return jsonify(msg='Invalid passcode!')
 
 # ~~~~~~~~~~~~~~~ Flask ~~~~~~~~~~~~~~~
 if __name__ == '__main__':
