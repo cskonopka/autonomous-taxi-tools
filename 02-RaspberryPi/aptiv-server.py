@@ -10,6 +10,7 @@ import RPi.GPIO as GPIO
 
 # General
 import time
+import os
 
 # ~~~~~~~~~~~~~~~ Flask ~~~~~~~~~~~~~~~
 app = Flask(__name__)
@@ -89,7 +90,7 @@ def dropoff():
 @app.route('/passcode', methods=['POST'])
 def passcode():
 	data = request.get_json()
-	if data['answer'] == '1994':
+	if data['answer'] == os.getenv('APTIV_PASSCODE'):
 		GPIO.output(27, GPIO.HIGH)
 		GPIO.output(2, GPIO.HIGH)
 		time.sleep(0.5)
