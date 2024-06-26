@@ -1,9 +1,8 @@
 <p align="center">
-  <img width="65%" height="65%" src="https://i.ibb.co/7twxPvD/aptiv.png"/>  
+  <img width="35%" height="35%" src="https://github.com/cskonopka/autonomous-taxi-tools/blob/master/img/autonomous-taxi-tools-logo.png?raw=true"/>  
 </p>
 
-*ATT* or "autonomous-taxi-tools" is a suite of interactive prototypes exploring various HMI interactions using a React Native mobile application and a Raspberry Pi running a Flask server. The purpose is to experiment with creating wireless solutions to enhance the passenger experience.
-
+<p align="center"><em>*ATT* or "autonomous-taxi-tools" is a suite of interactive prototypes exploring various HMI interactions using a React Native mobile application and a Raspberry Pi running a Flask server. The purpose is to experiment with creating wireless solutions to enhance the passenger experience.</em></p> 
 
 # Requirements
 
