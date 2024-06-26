@@ -2,7 +2,7 @@
   <img width="65%" height="65%" src="https://i.ibb.co/7twxPvD/aptiv.png"/>  
 </p>
 
-*TT* or "taxi-tools" is a suite of interactive prototypes exploring various HMI interactions using a React Native mobile application and a Raspberry Pi running a Flask server. The purpose is to experiment with creating wireless solutions to enhance the passenger experience.
+*ATT* or "autonomous-taxi-tools" is a suite of interactive prototypes exploring various HMI interactions using a React Native mobile application and a Raspberry Pi running a Flask server. The purpose is to experiment with creating wireless solutions to enhance the passenger experience.
 
 
 # Requirements
